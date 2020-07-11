@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Openlayers Layer Manager</title>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+</body>
+<script src='../dist/ol-layer-manager.js'></script>
+<script>
+    const map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+            center: ol.proj.fromLonLat([139.765, 35.65]),
+            zoom: 10,
+        })
+    });
+
+    const manager = new OLM(map);
+
+    manager.addGroup('base', {
+        type: 'single',
+        fixedTo: 'underlay'
+    });
+    manager.addGroup('group1');
+    manager.addGroup('group3');
+    manager.addGroup('group4');
+    manager.addGroup('group2', {
+        index: 3
+    });
+    manager.addGroup('group2/group1');
+
+    manager.addLayer('base/pale', new ol.layer.Tile({
+        _id: 'base/pale',
+        minZoom: 5,
+        source: new ol.source.XYZ({
+            attributions: [
+                "<a href='http: //maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>",
+            ],
+            maxZoom: 18,
+            url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+        })
+    }));
+
+    manager.addLayer('base/photo', new ol.layer.Tile({
+        _id: 'base/photo',
+        minZoom: 12,
+        source: new ol.source.XYZ({
+            attributions: [
+                "<a href='http: //maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>",
+            ],
+            maxZoom: 18,
+            url: "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
+        })
+    }));
+
+    manager.addLayer('base/std', new ol.layer.Tile({
+        _id: 'base/std',
+        minZoom: 5,
+        source: new ol.source.XYZ({
+            attributions: [
+                "<a href='http: //maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>",
+            ],
+            maxZoom: 18,
+            url: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png"
+        })
+    }));
+    manager.addLayer('image4', new ol.layer.Image({
+        _id: 'image4',
+        source: new ol.source.ImageStatic({
+            url: './4.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.7900390625, 35.56798045801208,
+                    139.8779296875, 35.63944106897394
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }), {
+        index: manager.getIndexById('group1')
+    });
+
+
+    manager.addLayer('image1', new ol.layer.Image({
+        _id: 'image1',
+        source: new ol.source.ImageStatic({
+            url: './1.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.74609375, 35.6037187406973,
+                    139.833984375, 35.67514743608467
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }));
+
+    manager.addLayer('image2', new ol.layer.Image({
+        _id: 'image2',
+        source: new ol.source.ImageStatic({
+            url: './2.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.7900390625, 35.6037187406973,
+                    139.8779296875, 35.67514743608467
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }), {
+        index: manager.getIndexById('group2')
+    });
+
+    manager.addLayer('image3', new ol.layer.Image({
+        _id: 'image3',
+        source: new ol.source.ImageStatic({
+            url: './3.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.74609375, 35.56798045801208,
+                    139.833984375, 35.63944106897394
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }), {
+        index: manager.getIndexById('group2')
+    });
+
+    manager.addLayer('group2/image5', new ol.layer.Image({
+        _id: 'group2/image5',
+        source: new ol.source.ImageStatic({
+            url: './5.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.74609375, 35.532226227703376,
+                    139.833984375, 35.6037187406973
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }), {
+        index: manager.getIndexById('group2/group1')
+    });
+
+
+    manager.addLayer('group2/group1/image6', new ol.layer.Image({
+        _id: 'group2/group1/image6',
+        source: new ol.source.ImageStatic({
+            url: './6.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.74609375, 35.532226227703376,
+                    139.790039063, 35.5679724842
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }));
+
+    manager.addLayer('group2/image7', new ol.layer.Image({
+        _id: 'group2/image7',
+        source: new ol.source.ImageStatic({
+            url: './7.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.7021484375, 35.63944106897394,
+                    139.7900390625, 35.71083783530008
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }));
+
+    manager.addLayer('image8', new ol.layer.Image({
+        _id: 'image8',
+        source: new ol.source.ImageStatic({
+            url: './8.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.7021484375, 35.6751394521,
+                    139.74609375, 35.71083783530008
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }));
+
+    manager.addGroup('group4/shape1');
+
+    manager.addLayer('group4/shape1/geojson', new ol.layer.Vector({
+        _id: 'group4/shape1/geojson',
+        source: new ol.source.Vector({
+            url: './shape.geojson',
+            format: new ol.format.GeoJSON()
+        })
+    }));
+
+    manager.addLayer('group4/image9', new ol.layer.Image({
+        _id: 'group4/image9',
+        source: new ol.source.ImageStatic({
+            url: './9.png',
+            imageExtent: ol.proj.transformExtent([
+                    139.614257813, 35.63944106897394,
+                    139.7021484375, 35.71083783530008
+                ], 'EPSG:4326',
+                'EPSG:3857')
+        })
+    }));
+
+    manager.move('group1', 'group2');
+    manager.move('group2/image5');
+</script>
+
+</html>
