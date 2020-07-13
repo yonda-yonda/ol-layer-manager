@@ -475,10 +475,8 @@ class OLM extends LayerGroup {
 
 		lyrs.forEach((lyr) => {
 			const layer = lyr._layer;
-			setZIndex(layer, z)
+			z = setZIndex(layer, z)
 		})
-
-		return z;
 	}
 
 	addGroup(id, options) {
