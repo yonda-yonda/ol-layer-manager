@@ -214,8 +214,7 @@ class LayerGroup {
 		addList(group, this._lyrs, index);
 	}
 
-	_removeGroup(groupId, options = {}) {
-		options = deepExtend({}, options);
+	_removeGroup(groupId) {
 		const grplyr = this._lyrs[getIndexByKey(this._lyrs, '_id', groupId)];
 		if (grplyr instanceof Layer) throw new Error(`${groupId} does not exist on this manager.`);
 		if (typeof grplyr === 'undefined') return;
@@ -286,8 +285,7 @@ class LayerGroup {
 		this._map.addLayer(layer);
 	}
 
-	_removeLayer(id, options = {}) {
-		options = deepExtend({}, options);
+	_removeLayer(id) {
 		const lyr = this._lyrs[getIndexByKey(this._lyrs, '_id', id)];
 		if (lyr instanceof LayerGroup) throw new Error('This id is not layer.');
 		if (typeof lyr === 'undefined') return;
@@ -467,7 +465,7 @@ class OLM extends LayerGroup {
 		function setZIndex(layer, z) {
 			if (typeof layer.getLayers === 'function') {
 				layer.getLayers().getArray().forEach((l) => {
-					z = set(l, z);
+					z = setZIndex(l, z);
 				})
 			} else {
 				layer.setZIndex(z++);
