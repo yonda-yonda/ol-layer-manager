@@ -258,6 +258,19 @@ manager.setOpacity("group1", 0.8);
 manager.isVisible("group1");
 ```
 
+### surce取得
+`manager.getSource(id)`
+
+layerのsourceを取得する。idがgroupの場合は無視させる。
+
+### argument
+* `id` レイヤーID (required)
+
+### example
+```js
+manager.getSource('shape')
+```
+
 ### surce書き換え
 `manager.setSource(id, source)`
 
