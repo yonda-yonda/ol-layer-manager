@@ -258,6 +258,24 @@ manager.setOpacity("group1", 0.8);
 manager.isVisible("group1");
 ```
 
+### surce書き換え
+`manager.setSource(id, source)`
+
+layerのsourceを書き換える。idがgroupの場合は無視させる。
+
+### argument
+* `id` レイヤーID (required)
+* `layer` ol.layerのsetSourceの引数と同じ (required)
+
+### example
+```js
+manager.setSource('shape',new ol.source.Vector({
+	features: new ol.format.GeoJSON({
+		featureProjection: 'EPSG:3857'
+	}).readFeatures(geojson)
+}))
+```
+
 ### mapのメソッド呼び出し
 `manager.invoke(funcName, args..)`
 
@@ -268,5 +286,5 @@ manager.isVisible("group1");
 
 ### example
 ```js
-manager.invoke("getLayoutProperty", "someId", "visibility")
+manager.invoke("getView")
 ```

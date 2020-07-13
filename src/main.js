@@ -684,6 +684,13 @@ class OLM extends LayerGroup {
 		}
 		return -1
 	}
+
+	setSource(id, source) {
+		const lyr = this._getById(id);
+		if (lyr instanceof Layer) {
+			lyr._layer.setSource(source)
+		}
+	}
 }
 
 export default OLM
