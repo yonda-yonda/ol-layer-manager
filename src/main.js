@@ -595,6 +595,11 @@ class OLM extends LayerGroup {
 		}
 	}
 
+	isGroup(id) {
+		const lyr = this._getById(id);
+		return lyr instanceof LayerGroup
+	}
+
 	isVisible(id, options) {
 		options = deepExtend({
 			ownStatus: false

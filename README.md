@@ -242,6 +242,19 @@ manager.move("group1", "pale");
 manager.setOpacity("group1", 0.8);
 ```
 
+### レイヤーグループか確認
+`manager.isGroup(id)`
+
+指定したレイヤーオブジェクトがレイヤーグループか確認にする。
+
+### argument
+* `id` レイヤーID (required)
+
+### example
+```js
+manager.isGroup("group1");
+```
+
 ### 表示状態の確認
 `manager.isVisible(id, options)`
 
@@ -251,6 +264,7 @@ manager.setOpacity("group1", 0.8);
 * `options` オプション
 
 #### configuration of options
+* `id` レイヤーID (required)
 * `ownStatus:` 祖先に表示ステータス(visible)に関わらず自身の表示ステータスのみ参照する。 デフォルトは`false`
 
 ### example

@@ -1270,6 +1270,16 @@ describe('others', () => {
 			visibility: 'none'
 		})).to.deep.equal([layerId4, groupId4]);
 	});
+	it('isGroup', () => {
+		const layerId1 = 'image1';
+		manager.addLayer(layerId1, dummyImageLayer(layerId1));
+
+		const groupId1 = 'group1'
+		manager.addGroup(groupId1);
+
+		chai.assert.strictEqual(manager.isGroup(layerId1), false);
+		chai.assert.strictEqual(manager.isGroup(groupId1), true);
+	});
 	it('isVisible', () => {
 		const layerId1 = 'image1';
 		manager.addLayer(layerId1, dummyImageLayer(layerId1));
